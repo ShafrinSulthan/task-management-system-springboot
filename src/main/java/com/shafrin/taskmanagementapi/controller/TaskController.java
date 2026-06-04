@@ -21,7 +21,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-
 @Tag(name = "Task Management API", description = "Operations related to task management")
 @RestController
 @RequestMapping("/api/tasks")
@@ -29,20 +28,23 @@ import lombok.RequiredArgsConstructor;
 public class TaskController {
 
     private final TaskService taskService;
-    @Operation(summary = "Create New Task")
+
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Create New Task")
     @PostMapping
     public String createTask(
             @Valid @RequestBody CreateTaskRequest request) {
 
         return taskService.createTask(request);
     }
+
     @Operation(summary = "Get Task By Id")
     @GetMapping("/{id}")
     public Task getTaskById(@PathVariable Long id) {
 
         return taskService.getTaskById(id);
     }
+
     @Operation(summary = "Update Task")
     @PutMapping("/{id}")
     public String updateTask(
@@ -51,19 +53,22 @@ public class TaskController {
 
         return taskService.updateTask(id, request);
     }
+
     @Operation(summary = "Delete Task")
-    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public String deleteTask(
             @PathVariable Long id) {
 
         return taskService.deleteTask(id);
     }
+
     @Operation(summary = "Get All Tasks")
     @GetMapping
     public List<Task> getAllTasks() {
+
         return taskService.getAllTasks();
     }
+
     @Operation(summary = "Get Tasks By Status")
     @GetMapping("/status/{status}")
     public List<Task> getTasksByStatus(
@@ -71,6 +76,7 @@ public class TaskController {
 
         return taskService.getTasksByStatus(status);
     }
+
     @Operation(summary = "Get Tasks By User Id")
     @GetMapping("/user/{userId}")
     public List<Task> getTasksByUserId(
