@@ -33,11 +33,11 @@ public class TaskService {
         task.setStatus(request.getStatus());
         task.setDueDate(request.getDueDate());
 
-        // User user = userRepository.findById(request.getUserId())
-        //         .orElseThrow(() ->
-        //                 new RuntimeException("User Not Found"));
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() ->
+                        new RuntimeException("User Not Found"));
 
-        // task.setUser(user);
+        task.setUser(user);
         taskRepository.save(task);
 
         logger.info("Task created successfully");
