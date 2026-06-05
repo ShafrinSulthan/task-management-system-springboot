@@ -104,6 +104,6 @@ public class TaskService {
     }
     public List<Task> getTasksByUserId(Long userId) {
 
-        return taskRepository.findByUserId(userId);
+        return taskRepository.findByUser_Id(userId);
     }
 }
