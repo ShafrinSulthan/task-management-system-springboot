@@ -9,7 +9,10 @@ import com.shafrin.taskmanagementapi.entity.Task;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
+
     List<Task> findByStatus(String status);
-    List<Task> findByUserId(Long userId);
+
+    List<Task> findByUser_Id(Long userId);
+
     long countByStatus(String status);
 }
